@@ -18,16 +18,18 @@ conda create -n treemap -c conda-forge r-treemap
 library(treemap)
  
 # Create data
-group <- c("B.1.1.7","B.1.351","A.27")
-value <- c(27,5,9)
-data <- data.frame(group,value)
+lineage <- c("B.1.1.7","B.1.351","A.27")
+count <- c(27,5,9)
+data <- data.frame(lineage,count)
  
 # treemap
+pdf('treemap.pdf')
 treemap(data,
-            index="group",
-            vSize="value",
+            index="lineage",
+            vSize="count",
             type="index"
             )
+dev.off()
 ```
 
 ## R treemap package with interactive HTML
