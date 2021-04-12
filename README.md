@@ -39,6 +39,14 @@ DIR='/scratch_slow/sc2/global/2021-04-11/clades/'
 awk 'BEGIN{FS=","};{print $2}' $DIR/clades-pangolin.csv | grep -v lineage | sort | uniq -c | awk '{print $2"\t"$1}' > sc2-pangolin.tsv
 ```
 
+Format of the `sc2-pangolin.tsv` to work with the folling R code should be (no header column):
+
+```
+B.1.1.7    24
+P.1        3
+A.27       12
+```
+
 ```R
 # library
 library(treemap)
