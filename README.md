@@ -32,6 +32,50 @@ treemap(data,
 dev.off()
 ```
 
+## Get SC2 data w/ lineages and counts
+
+```bash
+DIR='/scratch_slow/sc2/global/2021-04-11/clades/'
+awk 'BEGIN{FS=","};{print $2}' $DIR/clades-pangolin.csv | grep -v lineage | sort | uniq -c | awk '{print $2"\t"$1}' > sc2-pangolin.tsv
+```
+
+```R
+# library
+library(treemap)
+ 
+data <- read.csv('sc2-pangolin.tsv', sep = "\t", header = F)
+
+# Create data
+#lineage <- c("B.1.1.7","B.1.351","A.27")
+#count <- c(27,5,9)
+#data <- data.frame(lineage,count)
+
+num_lineages <- length(data$V1)
+num_sequences <- sum(data$V2)
+
+# treemap
+pdf('treemap.pdf')
+treemap(data,
+            index='V1',
+            vSize='V2',
+            type="index",
+            fontsize.labels=c(10),                # size of labels. Give the size per level of aggregation: size for group, size for subgroup, sub-subgroups...
+            #fontcolor.labels=c("white","orange"),    # Color of labels
+            fontface.labels=c(1),                  # Font of labels: 1,2,3,4 for normal, bold, italic, bold-italic...
+            bg.labels=c("transparent"),              # Background color of labels
+            align.labels=list(
+                #c("center", "center") 
+                c("left", "top")
+            ),                                   # Where to place labels in the rectangle?
+            overlap.labels=0.5,                      # number between 0 and 1 that determines the tolerance of the overlap between labels. 0 means that labels of lower levels are not printed if higher level labels overlap, 1  means that labels are always printed. In-between values, for instance the default value .5, means that lower level labels are printed if other labels do not overlap with more than .5  times their area size.
+            inflate.labels=F,                        # If true, labels are bigger when rectangle is bigger.
+            palette = "Set2",                        # Select your color palette from the RColorBrewer presets or make your own.
+            title=paste("Occurence of SARS-CoV-2 lineages in Germany, 2021-04-12 (", num_sequences, " sequences & ", num_lineages, " different lineages)", sep=""),  # Customize your title
+            fontsize.title=9,                       # Size of the title
+        )
+dev.off()
+```
+
 ## R treemap package with interactive HTML
 
 * https://www.r-graph-gallery.com/237-interactive-treemap.html
