@@ -80,7 +80,7 @@ treemap(data,
             overlap.labels=0.5,                      # number between 0 and 1 that determines the tolerance of the overlap between labels. 0 means that labels of lower levels are not printed if higher level labels overlap, 1  means that labels are always printed. In-between values, for instance the default value .5, means that lower level labels are printed if other labels do not overlap with more than .5  times their area size.
             inflate.labels=F,                        # If true, labels are bigger when rectangle is bigger.
             palette = "Set2",                        # Select your color palette from the RColorBrewer presets or make your own.
-            title=paste("Occurence of SARS-CoV-2 lineages in Germany, ", date " (", num_sequences, " sequences & ", num_lineages, " different lineages)", sep=""),  # Customize your title
+            title= paste("Occurence of SARS-CoV-2 lineages in Germany, ", date, " (", num_sequences, " sequences & ", num_lineages, " different lineages)", sep=""),  # Customize your title
             fontsize.title=9,                       # Size of the title
         )
 dev.off()
