@@ -52,8 +52,8 @@ A.27       12
 # library
 library(treemap)
  
-data <- read.csv('sc2-pangolin.tsv', sep = "\t", header = F)
 date <- '2021-05-09'
+data <- read.csv(paste(date, '_sc2-pangolin.tsv', sep=""), sep = "\t", header = F)
 
 # Create data
 #lineage <- c("B.1.1.7","B.1.351","A.27")
