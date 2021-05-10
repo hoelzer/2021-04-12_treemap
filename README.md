@@ -52,6 +52,7 @@ A.27       12
 # library
 library(treemap)
  
+
 date <- '2021-05-09'
 data <- read.csv(paste(date, '_sc2-pangolin.tsv', sep=""), sep = "\t", header = F)
 
@@ -85,6 +86,13 @@ treemap(data,
         )
 dev.off()
 ```
+
+## Remove B.1.1.7
+
+```
+awk '{if($1!="B.1.1.7"){print $0}}' 2021-05-09_sc2-pangolin.tsv > 2021-05-09_sc2-pangolin-no-B117.tsv
+```
+
 
 ## R treemap package with interactive HTML
 
